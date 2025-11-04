@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard | Exploring Digital Security</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff9d;
+            --secondary: #0066ff;
+            --dark: #0a0a16;
+            --darker: #050510;
+            --light: #e0e0ff;
+            --danger: #ff0055;
+            --theme-name: "cyberpunk";
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            transition: background-color 0.8s ease;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        
+        .cyber-gradient {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cyber-border {
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(5, 5, 16, 0.8), rgba(5, 5, 16, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050510"/><path d="M0 0L100 100M100 0L0 100" stroke="%2300ff9d" stroke-width="0.5"/></svg>');
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 102, 255, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 20%, rgba(0, 255, 157, 0.15) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .glitch {
+            position: relative;
+            animation: glitch 5s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(-2px, -2px); }
+            6% { transform: translate(2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        
+        .cyber-card {
+            background-color: rgba(10, 10, 22, 0.7);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .cyber-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.3);
+        }
+        
+        .cyber-btn {
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border: none;
+            color: var(--darker);
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .cyber-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary);
+        }
+        
+        .terminal {
+            background-color: var(--darker);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .terminal-line {
+            margin-bottom: 10px;
+        }
+        
+        .terminal-prompt {
+            color: var(--primary);
+        }
+        
+        .terminal-text {
+            color: var(--light);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+        }
+        
+        .encryption-animation {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .binary-code {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 20px,
+                rgba(0, 255, 157, 0.05) 20px,
+                rgba(0, 255, 157, 0.05) 40px
+            );
+        }
+        
+        .binary-digit {
+            position: absolute;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        
+        footer {
+            background-color: var(--darker);
+            border-top: 1px solid var(--secondary);
+        }
+        
+        .nav-link {
+            color: var(--light);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+        
+        .cyber-nav {
+            background-color: rgba(5, 5, 16, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        
+        .quiz-option {
+            background-color: rgba(10, 10, 22, 0.7);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background-color: rgba(0, 102, 255, 0.2);
+        }
+        
+        .quiz-option.correct {
+            background-color: rgba(0, 255, 157, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: rgba(255, 0, 85, 0.2);
+            border-color: var(--danger);
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+        
+        .author-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 102, 255, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .copy-protection-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .copy-protection-message {
+            background: var(--darker);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            border: 2px solid var(--danger);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+        }
+        
+        .password-checker {
+            background-color: rgba(10, 10, 22, 0.7);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .password-strength-meter {
+            height: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: var(--darker);
+            overflow: hidden;
+        }
+        
+        .password-strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .weak { background-color: var(--danger); width: 25%; }
+        .fair { background-color: #ffaa00; width: 50%; }
+        .good { background-color: #ffff00; width: 75%; }
+        .strong { background-color: var(--primary); width: 100%; }
+        
+        .chapter-card {
+            background-color: rgba(10, 10, 22, 0.7);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+        }
+        
+        .chapter-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+            color: var(--darker);
+        }
+        
+        /* New styles for expandable chapters */
+        .chapter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        
+        .chapter-content.active {
+            max-height: 1000px;
+        }
+        
+        .chapter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chapter-toggle {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .chapter-toggle.active {
+            transform: rotate(180deg);
+        }
+        
+        .chapter-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+        
+        /* New styles for animations and themes */
+        .theme-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(5, 5, 16, 0.8);
+            border-radius: 50px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--secondary);
+        }
+        
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 5px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-btn.active {
+            border-color: var(--light);
+            transform: scale(1.1);
+        }
+        
+        .theme-cyberpunk {
+            background: linear-gradient(45deg, #0066ff, #00ff9d);
+        }
+        
+        .theme-matrix {
+            background: linear-gradient(45deg, #00ff41, #008f11);
+        }
+        
+        .theme-neon {
+            background: linear-gradient(45deg, #ff00ff, #ff0055);
+        }
+        
+        .theme-ocean {
+            background: linear-gradient(45deg, #00a2ff, #00fff2);
+        }
+        
+        .theme-sunset {
+            background: linear-gradient(45deg, #ff7b00, #ff0080);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .bounce-in {
+            animation: bounceIn 1s ease-out;
+        }
+        
+        .text-reveal {
+            overflow: hidden;
+        }
+        
+        .text-reveal span {
+            display: inline-block;
+            animation: textReveal 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes textReveal {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .cyber-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cyber-logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            border-radius: 5px;
+        }
+        
+        .logo-icon {
+            display: inline-block;
+            margin-right: 15px;
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .video-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 9998;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .video-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .transition-content {
+            text-align: center;
+        }
+        
+        .transition-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .transition-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .chapter-text {
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .chapter-content.active .chapter-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .chapter-content.active .chapter-text:nth-child(1) { transition-delay: 0.1s; }
+        .chapter-content.active .chapter-text:nth-child(2) { transition-delay: 0.2s; }
+        .chapter-content.active .chapter-text:nth-child(3) { transition-delay: 0.3s; }
+        .chapter-content.active .chapter-text:nth-child(4) { transition-delay: 0.4s; }
+        
+        /* New styles for video presentation */
+        .video-presentation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            z-index: 9997;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        
+        .video-presentation.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .presentation-container {
+            width: 80%;
+            max-width: 1000px;
+            height: 80%;
+            background: rgba(5, 5, 16, 0.9);
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .presentation-header {
+            background: rgba(0, 102, 255, 0.2);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .presentation-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .presentation-close {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .presentation-close:hover {
+            color: var(--primary);
+        }
+        
+        .presentation-content {
+            height: calc(100% - 60px);
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .presentation-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .presentation-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .presentation-slide.prev {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+        
+        .slide-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .slide-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .slide-highlight {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .presentation-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+        
+        .presentation-btn {
+            background: rgba(0, 102, 255, 0.3);
+            border: 1px solid var(--secondary);
+            color: var(--light);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .presentation-btn:hover {
+            background: rgba(0, 102, 255, 0.5);
+            transform: translateY(-3px);
+        }
+        
+        .presentation-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .presentation-progress {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .video-presentation-btn {
+            display: block;
+            margin: 30px auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Presentation -->
+    <div class="video-presentation" id="video-presentation">
+        <div class="presentation-container">
+            <div class="presentation-header">
+                <div class="presentation-title">Cyber Security Chapters</div>
+                <button class="presentation-close" id="presentation-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="presentation-content" id="presentation-content">
+                <!-- Slides will be dynamically inserted here -->
+            </div>
+            <div class="presentation-controls">
+                <button class="presentation-btn" id="prev-slide" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <button class="presentation-btn" id="next-slide">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="presentation-progress">
+                <div class="progress-bar" id="presentation-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Transition Overlay -->
+    <div class="video-transition" id="video-transition">
+        <div class="transition-content">
+            <div class="transition-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="transition-text">CYBERGUARD</div>
+        </div>
+    </div>
+
+    <!-- Copy Protection Overlay -->
+    <div class="copy-protection-overlay" id="copy-protection">
+        <div class="copy-protection-message">
+            <h3 class="text-danger">⚠️ Restricted Access</h3>
+            <p>This content is protected. Copying or inspecting the source code is not permitted.</p>
+            <button class="cyber-btn mt-3" onclick="hideCopyProtection()">Close</button>
+        </div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <div class="theme-btn theme-cyberpunk active" data-theme="cyberpunk" title="Cyberpunk Theme"></div>
+        <div class="theme-btn theme-matrix" data-theme="matrix" title="Matrix Theme"></div>
+        <div class="theme-btn theme-neon" data-theme="neon" title="Neon Theme"></div>
+        <div class="theme-btn theme-ocean" data-theme="ocean" title="Ocean Theme"></div>
+        <div class="theme-btn theme-sunset" data-theme="sunset" title="Sunset Theme"></div>
+    </div>
+
+    <!-- Author Badge -->
+    <div class="author-badge">
+        Made by Divyansh Pachouli | Class 7th B | DPS Rudrapur
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg cyber-nav fixed-top">
+        <div class="container">
+            <a class="navbar-brand cyber-gradient" href="#">
+                <i class="fas fa-shield-alt"></i> CyberGuard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);">☰</span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapters">Chapters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#threats">Threats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#defenses">Defenses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quiz">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources">Resources</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="logo-container">
+                <div class="cyber-logo bounce-in">
+                    <span class="logo-icon"><i class="fas fa-shield-alt"></i></span>
+                    CYBERGUARD
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-3 fw-bold glitch">CYBER <span class="cyber-gradient">GUARD</span></h1>
+                    <h2 class="h3 mb-4 typewriter">Defenders of the Digital World</h2>
+                    <p class="lead mb-4">Step into cyberspace, uncover its secrets, and discover how creativity meets the code that keeps our world safe.</p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#about" class="cyber-btn">Explore Now</a>
+                        <a href="#quiz" class="btn btn-outline-light">Test Your Knowledge</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="terminal">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">user@cyberspace:~$ </span>
+                            <span class="terminal-text">initiate_security_protocol</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">> </span>
+                            <span class="terminal-text">Encryption algorithms: ACTIVE</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">> </span>
+                            <span class="terminal-text">Firewall: OPERATIONAL</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">> </span>
+                            <span class="terminal-text">Threat detection: ONLINE</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">> </span>
+                            <span class="terminal-text">Welcome to CyberGuard</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">user@cyberspace:~$ </span>
+                            <span class="terminal-text" id="typing-text"></span>
+                            <span class="terminal-prompt blinking-cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="encryption-animation">
+            <div class="binary-code" id="binary-rain"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">About CyberGuard</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="cyber-card p-4 h-100 slide-in-left">
+                        <h3 class="h4 mb-3">What is Cyber Security?</h3>
+                        <p>Cyber security is the practice of protecting computers, servers, networks, and data from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information, extorting money from users, or interrupting normal business processes.</p>
+                        <p>Implementing effective cybersecurity measures is particularly challenging today because there are more devices than people, and attackers are becoming more innovative.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="cyber-card p-4 h-100 slide-in-right">
+                        <h3 class="h4 mb-3">Why It Matters</h3>
+                        <p>In our increasingly digital world, cybersecurity has never been more important. From personal data to critical infrastructure, nearly everything relies on computer systems and the internet.</p>
+                        <p>Good cybersecurity helps protect:</p>
+                        <ul>
+                            <li>Personal information and identity</li>
+                            <li>Financial data and transactions</li>
+                            <li>Business operations and intellectual property</li>
+                            <li>National security and critical infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="cyber-card p-4 fade-in">
+                        <h3 class="h4 mb-3">The Cybersecurity Landscape</h3>
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <h4 class="cyber-gradient">4.35M</h4>
+                                    <p>Cybersecurity professionals needed worldwide</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <h4 class="cyber-gradient">$10.5T</h4>
+                                    <p>Annual cost of cybercrime by 2025</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <h4 class="cyber-gradient">560K</h4>
+                                    <p>New pieces of malware detected daily</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <h4 class="cyber-gradient">94%</h4>
+                                    <p>Malware delivered via email</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapters Section -->
+    <section id="chapters" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">Cyber Security Chapters</h2>
+            <p class="lead text-center mb-5">Explore these 10 chapters to understand the fundamentals of cybersecurity</p>
+            
+            <button class="cyber-btn video-presentation-btn" id="start-presentation">
+                <i class="fas fa-play-circle"></i> Watch Video Presentation
+            </button>
+            
+            <div class="row">
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-1">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">1</span> Introduction to Cyber Security</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Cyber security is the practice of protecting computers, servers, networks, and data from digital attacks. Hackers try to steal or destroy important data, but cyber security keeps information safe.</p>
+                            <p class="chapter-text"><strong>Why it matters:</strong> Protects personal data, keeps schools and banks safe, helps create a safe digital India.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-2">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">2</span> Types of Cyber Threats</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Cyber threats are attacks that can harm computers or steal data. Common threats include viruses, worms, phishing, spyware, and ransomware.</p>
+                            <p class="chapter-text"><strong>Tip:</strong> Never click on unknown links or attachments in emails or messages.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-3">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">3</span> Cyber Ethics & Netiquette</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Cyber ethics means using technology responsibly. Netiquette (Internet + Etiquette) refers to good manners online.</p>
+                            <p class="chapter-text"><strong>Good Cyber Ethics:</strong> Be polite and respectful online, never post hurtful comments, ask permission before sharing photos, report cyberbullying.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-4">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">4</span> Password Protection</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Your password is your digital key. If someone gets it, they can enter your online world.</p>
+                            <p class="chapter-text"><strong>Tips for Strong Passwords:</strong> Use a mix of uppercase, lowercase, numbers, and symbols; avoid personal information; change regularly; use 2-factor authentication.</p>
+                            <div class="password-checker">
+                                <h5 class="mb-3">Password Strength Checker</h5>
+                                <input type="password" class="form-control bg-dark text-light border-secondary mb-2" id="password-input" placeholder="Enter a password to test">
+                                <div class="password-strength-meter">
+                                    <div class="password-strength-fill" id="password-strength"></div>
+                                </div>
+                                <p id="password-feedback" class="mt-2 small"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-5">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">5</span> Data Encryption</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Encryption is the process of changing readable data into code to protect it from hackers. Only someone with the decryption key can read it.</p>
+                            <p class="chapter-text">Encryption keeps your chats, banking, and school data secure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-6">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">6</span> Safe Internet Browsing</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">When using the internet: Always check if the website starts with HTTPS, never download from unknown sources, avoid pop-up ads, log out after using public computers.</p>
+                            <p class="chapter-text"><strong>Remember:</strong> Think before you click!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-7">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">7</span> Cyber Laws in India</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">The government created laws to protect people online. The main one is The Information Technology (IT) Act, 2000.</p>
+                            <p class="chapter-text">Under this law: Hacking and identity theft are punishable crimes, online bullying and harassment are illegal, data theft can lead to fines or jail.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-8">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">8</span> Social Media Safety</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Social media helps us connect, but it can also be dangerous if misused.</p>
+                            <p class="chapter-text"><strong>Safety Tips:</strong> Keep your account private, don't accept friend requests from strangers, never share OTPs or personal details, think before posting pictures.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-9">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">9</span> Cyberbullying & Online Harassment</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">Cyberbullying is when someone uses the internet to hurt, threaten, or embarrass others.</p>
+                            <p class="chapter-text"><strong>If it happens:</strong> Don't reply to bullies, take screenshots, report to a teacher, parent, or cyber police.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <div class="chapter-card" id="chapter-10">
+                        <div class="chapter-header">
+                            <h3><span class="chapter-number">10</span> The Future of Cyber Security</h3>
+                            <span class="chapter-toggle">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <p class="chapter-text">The future will depend on smart defenders — people like you!</p>
+                            <p class="chapter-text"><strong>Trends:</strong> AI will detect hackers faster, blockchain will secure transactions, ethical hackers will protect systems.</p>
+                            <p class="chapter-text"><strong>Cyber Security Careers:</strong> Ethical Hacker, Security Analyst, Forensic Expert, Data Protection Officer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Threats Section -->
+    <section id="threats" class="py-5">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">Cyber Threats</h2>
+            <p class="lead text-center mb-5">Understanding the different types of cyber threats is the first step in defending against them.</p>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-danger d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-white fw-bold">M</span>
+                            </div>
+                        </div>
+                        <h4>Malware</h4>
+                        <p>Malicious software designed to harm or exploit any programmable device or network.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-danger">Viruses</span>
+                            <span class="badge bg-danger">Worms</span>
+                            <span class="badge bg-danger">Trojans</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-warning d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-dark fw-bold">P</span>
+                            </div>
+                        </div>
+                        <h4>Phishing</h4>
+                        <p>Fraudulent attempts to obtain sensitive information by disguising as a trustworthy entity.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-warning text-dark">Email Scams</span>
+                            <span class="badge bg-warning text-dark">Spoofing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-info d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-white fw-bold">R</span>
+                            </div>
+                        </div>
+                        <h4>Ransomware</h4>
+                        <p>Malware that encrypts a victim's files and demands payment to restore access.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-info">Data Encryption</span>
+                            <span class="badge bg-info">Extortion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-success d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-white fw-bold">D</span>
+                            </div>
+                        </div>
+                        <h4>DDoS Attacks</h4>
+                        <p>Distributed Denial of Service attacks overwhelm systems with traffic to disrupt services.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-success">Botnets</span>
+                            <span class="badge bg-success">Traffic Flood</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-white fw-bold">S</span>
+                            </div>
+                        </div>
+                        <h4>Social Engineering</h4>
+                        <p>Psychological manipulation to trick people into revealing confidential information.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary">Pretexting</span>
+                            <span class="badge bg-primary">Baiting</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="cyber-card p-4 h-100 text-center">
+                        <div class="mb-3">
+                            <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <span class="text-white fw-bold">I</span>
+                            </div>
+                        </div>
+                        <h4>Insider Threats</h4>
+                        <p>Security risks that originate from within the organization, often from employees.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-secondary">Sabotage</span>
+                            <span class="badge bg-secondary">Data Theft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Defenses Section -->
+    <section id="defenses" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">Digital Defenses</h2>
+            <p class="lead text-center mb-5">Explore the technologies and practices that protect our digital world.</p>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="cyber-card p-4 h-100">
+                        <h3 class="h4 mb-3">Encryption</h3>
+                        <p>Encryption converts data into a coded form that can only be accessed with the correct key. It's one of the most fundamental cybersecurity tools.</p>
+                        <div class="mt-4">
+                            <h5 class="mb-3">Try a simple encryption:</h5>
+                            <div class="mb-3">
+                                <input type="text" class="form-control bg-dark text-light border-secondary mb-2" id="encrypt-input" placeholder="Enter text to encrypt">
+                                <button class="cyber-btn w-100" id="encrypt-btn">Encrypt</button>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control bg-dark text-light border-secondary" id="encrypt-output" placeholder="Encrypted text will appear here" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="cyber-card p-4 h-100">
+                        <h3 class="h4 mb-3">Firewalls</h3>
+                        <p>Firewalls act as barriers between trusted internal networks and untrusted external networks, controlling traffic based on security rules.</p>
+                        <div class="progress mb-2" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="small">Network traffic filtered: 85%</p>
+                        
+                        <div class="progress mb-2" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: 92%;" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="small">Threats blocked: 92%</p>
+                        
+                        <div class="progress mb-2" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: 78%;" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="small">Unauthorized access prevented: 78%</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="cyber-card p-4">
+                        <h3 class="h4 mb-4 text-center">Security Practices</h3>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center pulse" style="width: 50px; height: 50px;">
+                                            <span class="text-white fw-bold">1</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5>Strong Passwords</h5>
+                                        <p class="small">Use complex, unique passwords for each account and enable two-factor authentication.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <div class="rounded-circle bg-success d-flex align-items-center justify-content-center pulse" style="width: 50px; height: 50px;">
+                                            <span class="text-white fw-bold">2</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5>Regular Updates</h5>
+                                        <p class="small">Keep all software, especially security software, updated to patch vulnerabilities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <div class="rounded-circle bg-warning d-flex align-items-center justify-content-center pulse" style="width: 50px; height: 50px;">
+                                            <span class="text-dark fw-bold">3</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5>Backup Data</h5>
+                                        <p class="small">Regularly backup important data to recover quickly in case of ransomware or data loss.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="py-5">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">Cyber Security Quiz</h2>
+            <p class="lead text-center mb-5">Test your knowledge about cybersecurity concepts and best practices.</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="cyber-card p-4">
+                        <div id="quiz-container">
+                            <div id="quiz-intro">
+                                <h3 class="text-center mb-4">Ready to test your cybersecurity knowledge?</h3>
+                                <p class="text-center mb-4">This quiz contains 5 questions about basic cybersecurity concepts. See how many you can get right!</p>
+                                <div class="text-center">
+                                    <button class="cyber-btn" id="start-quiz">Start Quiz</button>
+                                </div>
+                            </div>
+                            
+                            <div id="quiz-questions" class="d-none">
+                                <div class="d-flex justify-content-between mb-4">
+                                    <span>Question <span id="current-question">1</span> of 5</span>
+                                    <span>Score: <span id="score">0</span></span>
+                                </div>
+                                
+                                <h4 id="question-text" class="mb-4"></h4>
+                                
+                                <div id="options-container" class="mb-4"></div>
+                                
+                                <div class="text-center">
+                                    <button class="cyber-btn d-none" id="next-question">Next Question</button>
+                                    <button class="cyber-btn d-none" id="show-results">Show Results</button>
+                                </div>
+                            </div>
+                            
+                            <div id="quiz-results" class="d-none text-center">
+                                <h3 class="mb-4">Quiz Complete!</h3>
+                                <div class="mb-4">
+                                    <h2 class="cyber-gradient" id="final-score">0/5</h2>
+                                    <p id="result-message"></p>
+                                </div>
+                                <button class="cyber-btn" id="restart-quiz">Take Quiz Again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title cyber-gradient">Resources & Further Learning</h2>
+            <p class="lead text-center mb-5">Explore these resources to learn more about cybersecurity.</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="cyber-card p-4 h-100">
+                        <h4 class="mb-3">Educational Websites</h4>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a href="https://www.cisa.gov/cybersecurity" class="text-decoration-none cyber-gradient" target="_blank">CISA Cybersecurity</a>
+                                <p class="small">U.S. government resources for cybersecurity awareness</p>
+                            </li>
+                            <li class="mb-2">
+                                <a href="https://www.sans.org/cyber-security-courses/" class="text-decoration-none cyber-gradient" target="_blank">SANS Cyber Aces</a>
+                                <p class="small">Free cybersecurity courses for beginners</p>
+                            </li>
+                            <li class="mb-2">
+                                <a href="https://www.khanacademy.org/computing/computers-and-internet" class="text-decoration-none cyber-gradient" target="_blank">Khan Academy</a>
+                                <p class="small">Computer science and internet safety courses</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4">
+                    <div class="cyber-card p-4 h-100">
+                        <h4 class="mb-3">Career Paths</h4>
+                        <div class="mb-3">
+                            <h5 class="h6">Security Analyst</h5>
+                            <p class="small">Monitor networks for security breaches and investigate violations</p>
+                        </div>
+                        <div class="mb-3">
+                            <h5 class="h6">Ethical Hacker</h5>
+                            <p class="small">Test systems for vulnerabilities to help organizations improve security</p>
+                        </div>
+                        <div class="mb-3">
+                            <h5 class="h6">Cryptographer</h5>
+                            <p class="small">Develop encryption algorithms to protect sensitive information</p>
+                        </div>
+                        <div>
+                            <h5 class="h6">Security Architect</h5>
+                            <p class="small">Design and build secure network systems and structures</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="cyber-card p-4">
+                        <h4 class="text-center mb-4">Stay Safe Online</h4>
+                        <div class="row text-center">
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                        <span class="text-white">🔒</span>
+                                    </div>
+                                    <h5>Use Strong Passwords</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <div class="rounded-circle bg-success d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                        <span class="text-white">🔄</span>
+                                    </div>
+                                    <h5>Update Regularly</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <div class="rounded-circle bg-warning d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                        <span class="text-dark">⚠️</span>
+                                    </div>
+                                    <h5>Be Wary of Links</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="p-3">
+                                    <div class="rounded-circle bg-info d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                        <span class="text-white">📱</span>
+                                    </div>
+                                    <h5>Secure All Devices</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h3 class="cyber-gradient">CyberGuard</h3>
+                    <p class="small mb-0">Defenders of the Digital World</p>
+                    <p class="small mb-0 mt-2 fw-bold">Made by Divyansh Pachouli and Advait S Nair | Class 7th B | DPS Rudrapur</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small mb-0">Created for DPS Greater Faridabad Cyber Security Competition</p>
+                    <p class="small mb-0">Junior Category | Theme: Cyber Security</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Copy protection
+            function showCopyProtection() {
+                $('#copy-protection').css('opacity', '1').css('pointer-events', 'all');
+            }
+            
+            function hideCopyProtection() {
+                $('#copy-protection').css('opacity', '0').css('pointer-events', 'none');
+            }
+            
+            // Disable right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showCopyProtection();
+            });
+            
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+            document.addEventListener('keydown', function(e) {
+                if (
+                    e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                    (e.ctrlKey && e.key === 'u')
+                ) {
+                    e.preventDefault();
+                    showCopyProtection();
+                }
+            });
+            
+            // Binary rain animation
+            function createBinaryRain() {
+                const container = $('#binary-rain');
+                const digits = '01';
+                
+                for (let i = 0; i < 50; i++) {
+                    const digit = $('<div class="binary-digit"></div>');
+                    digit.text(digits.charAt(Math.floor(Math.random() * digits.length)));
+                    digit.css({
+                        left: Math.random() * 100 + '%',
+                        top: -20 + 'px',
+                        animationDuration: (Math.random() * 5 + 3) + 's',
+                        animationDelay: Math.random() * 5 + 's'
+                    });
+                    container.append(digit);
+                }
+            }
+            
+            createBinaryRain();
+            
+            // Terminal typing effect
+            const terminalText = "explore_cybersecurity --interactive";
+            let i = 0;
+            function typeTerminalText() {
+                if (i < terminalText.length) {
+                    $('#typing-text').append(terminalText.charAt(i));
+                    i++;
+                    setTimeout(typeTerminalText, 100);
+                }
+            }
+            
+            setTimeout(typeTerminalText, 2000);
+            
+            // Simple encryption demo
+            $('#encrypt-btn').click(function() {
+                const input = $('#encrypt-input').val();
+                if (input) {
+                    // Simple Caesar cipher for demonstration
+                    let encrypted = '';
+                    for (let i = 0; i < input.length; i++) {
+                        let charCode = input.charCodeAt(i);
+                        // Shift letters by 3 positions
+                        if (charCode >= 65 && charCode <= 90) {
+                            encrypted += String.fromCharCode(((charCode - 65 + 3) % 26) + 65);
+                        } else if (charCode >= 97 && charCode <= 122) {
+                            encrypted += String.fromCharCode(((charCode - 97 + 3) % 26) + 97);
+                        } else {
+                            encrypted += input.charAt(i);
+                        }
+                    }
+                    $('#encrypt-output').val(encrypted);
+                }
+            });
+            
+            // Expandable chapters functionality
+            $('.chapter-card').click(function() {
+                // Show video transition
+                $('#video-transition').addClass('active');
+                
+                setTimeout(() => {
+                    // Close all other chapters
+                    $('.chapter-card').not(this).removeClass('active');
+                    $('.chapter-content').not($(this).find('.chapter-content')).removeClass('active');
+                    $('.chapter-toggle').not($(this).find('.chapter-toggle')).removeClass('active');
+                    
+                    // Toggle this chapter
+                    $(this).toggleClass('active');
+                    $(this).find('.chapter-content').toggleClass('active');
+                    $(this).find('.chapter-toggle').toggleClass('active');
+                    
+                    // Hide video transition
+                    setTimeout(() => {
+                        $('#video-transition').removeClass('active');
+                    }, 500);
+                }, 800);
+            });
+            
+            // Theme switching functionality
+            $('.theme-btn').click(function() {
+                const theme = $(this).data('theme');
+                $('.theme-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                // Show video transition
+                $('#video-transition').addClass('active');
+                
+                setTimeout(() => {
+                    // Change theme
+                    changeTheme(theme);
+                    
+                    // Hide video transition
+                    setTimeout(() => {
+                        $('#video-transition').removeClass('active');
+                    }, 500);
+                }, 800);
+            });
+            
+            function changeTheme(theme) {
+                let primary, secondary;
+                
+                switch(theme) {
+                    case 'cyberpunk':
+                        primary = '#00ff9d';
+                        secondary = '#0066ff';
+                        break;
+                    case 'matrix':
+                        primary = '#00ff41';
+                        secondary = '#008f11';
+                        break;
+                    case 'neon':
+                        primary = '#ff00ff';
+                        secondary = '#ff0055';
+                        break;
+                    case 'ocean':
+                        primary = '#00fff2';
+                        secondary = '#00a2ff';
+                        break;
+                    case 'sunset':
+                        primary = '#ff7b00';
+                        secondary = '#ff0080';
+                        break;
+                    default:
+                        primary = '#00ff9d';
+                        secondary = '#0066ff';
+                }
+                
+                // Update CSS variables
+                document.documentElement.style.setProperty('--primary', primary);
+                document.documentElement.style.setProperty('--secondary', secondary);
+                document.documentElement.style.setProperty('--theme-name', theme);
+            }
+            
+            // Password strength checker
+            $('#password-input').on('input', function() {
+                const password = $(this).val();
+                let strength = 0;
+                let feedback = '';
+                
+                if (password.length > 0) {
+                    if (password.length < 6) {
+                        strength = 1;
+                        feedback = 'Very weak - too short';
+                    } else {
+                        // Check for lowercase letters
+                        if (/[a-z]/.test(password)) strength++;
+                        
+                        // Check for uppercase letters
+                        if (/[A-Z]/.test(password)) strength++;
+                        
+                        // Check for numbers
+                        if (/[0-9]/.test(password)) strength++;
+                        
+                        // Check for special characters
+                        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+                        
+                        // Check length
+                        if (password.length >= 12) strength++;
+                        
+                        // Determine feedback
+                        if (strength <= 2) {
+                            feedback = 'Weak password';
+                        } else if (strength <= 3) {
+                            feedback = 'Fair password';
+                        } else if (strength <= 4) {
+                            feedback = 'Good password';
+                        } else {
+                            feedback = 'Strong password!';
+                        }
+                    }
+                }
+                
+                // Update strength meter
+                const strengthFill = $('#password-strength');
+                strengthFill.removeClass('weak fair good strong');
+                
+                if (strength <= 1) {
+                    strengthFill.addClass('weak');
+                } else if (strength <= 2) {
+                    strengthFill.addClass('fair');
+                } else if (strength <= 4) {
+                    strengthFill.addClass('good');
+                } else {
+                    strengthFill.addClass('strong');
+                }
+                
+                $('#password-feedback').text(feedback);
+            });
+            
+            // Text reveal animation for chapter headers
+            $('.chapter-header h3').each(function() {
+                const text = $(this).text();
+                $(this).html('');
+                for (let i = 0; i < text.length; i++) {
+                    $(this).append('<span>' + text[i] + '</span>');
+                }
+                
+                $(this).find('span').each(function(index) {
+                    $(this).css('animation-delay', (index * 0.05) + 's');
+                });
+            });
+            
+            // Video presentation functionality
+            const slides = [
+                {
+                    title: "Introduction to Cyber Security",
+                    content: "Cyber security is the practice of protecting computers, servers, networks, and data from digital attacks. Hackers try to steal or destroy important data, but cyber security keeps information safe.<br><br><span class='slide-highlight'>Why it matters:</span> Protects personal data, keeps schools and banks safe, helps create a safe digital India."
+                },
+                {
+                    title: "Types of Cyber Threats",
+                    content: "Cyber threats are attacks that can harm computers or steal data. Common threats include viruses, worms, phishing, spyware, and ransomware.<br><br><span class='slide-highlight'>Tip:</span> Never click on unknown links or attachments in emails or messages."
+                },
+                {
+                    title: "Cyber Ethics & Netiquette",
+                    content: "Cyber ethics means using technology responsibly. Netiquette (Internet + Etiquette) refers to good manners online.<br><br><span class='slide-highlight'>Good Cyber Ethics:</span> Be polite and respectful online, never post hurtful comments, ask permission before sharing photos, report cyberbullying."
+                },
+                {
+                    title: "Password Protection",
+                    content: "Your password is your digital key. If someone gets it, they can enter your online world.<br><br><span class='slide-highlight'>Tips for Strong Passwords:</span> Use a mix of uppercase, lowercase, numbers, and symbols; avoid personal information; change regularly; use 2-factor authentication."
+                },
+                {
+                    title: "Data Encryption",
+                    content: "Encryption is the process of changing readable data into code to protect it from hackers. Only someone with the decryption key can read it.<br><br>Encryption keeps your chats, banking, and school data secure."
+                },
+                {
+                    title: "Safe Internet Browsing",
+                    content: "When using the internet: Always check if the website starts with HTTPS, never download from unknown sources, avoid pop-up ads, log out after using public computers.<br><br><span class='slide-highlight'>Remember:</span> Think before you click!"
+                },
+                {
+                    title: "Cyber Laws in India",
+                    content: "The government created laws to protect people online. The main one is The Information Technology (IT) Act, 2000.<br><br>Under this law: Hacking and identity theft are punishable crimes, online bullying and harassment are illegal, data theft can lead to fines or jail."
+                },
+                {
+                    title: "Social Media Safety",
+                    content: "Social media helps us connect, but it can also be dangerous if misused.<br><br><span class='slide-highlight'>Safety Tips:</span> Keep your account private, don't accept friend requests from strangers, never share OTPs or personal details, think before posting pictures."
+                },
+                {
+                    title: "Cyberbullying & Online Harassment",
+                    content: "Cyberbullying is when someone uses the internet to hurt, threaten, or embarrass others.<br><br><span class='slide-highlight'>If it happens:</span> Don't reply to bullies, take screenshots, report to a teacher, parent, or cyber police."
+                },
+                {
+                    title: "The Future of Cyber Security",
+                    content: "The future will depend on smart defenders — people like you!<br><br><span class='slide-highlight'>Trends:</span> AI will detect hackers faster, blockchain will secure transactions, ethical hackers will protect systems.<br><br><span class='slide-highlight'>Cyber Security Careers:</span> Ethical Hacker, Security Analyst, Forensic Expert, Data Protection Officer."
+                }
+            ];
+            
+            let currentSlide = 0;
+            
+            // Initialize presentation slides
+            function initPresentation() {
+                const content = $('#presentation-content');
+                content.empty();
+                
+                slides.forEach((slide, index) => {
+                    const slideElement = $('<div class="presentation-slide"></div>');
+                    slideElement.html(`
+                        <h2 class="slide-title">${slide.title}</h2>
+                        <div class="slide-content">${slide.content}</div>
+                    `);
+                    
+                    if (index === 0) {
+                        slideElement.addClass('active');
+                    }
+                    
+                    content.append(slideElement);
+                });
+                
+                updatePresentationControls();
+            }
+            
+            // Update presentation controls
+            function updatePresentationControls() {
+                $('#prev-slide').prop('disabled', currentSlide === 0);
+                $('#next-slide').prop('disabled', currentSlide === slides.length - 1);
+                
+                const progress = ((currentSlide + 1) / slides.length) * 100;
+                $('#presentation-progress').css('width', progress + '%');
+            }
+            
+            // Navigate to slide
+            function goToSlide(index) {
+                $('.presentation-slide').removeClass('active prev');
+                
+                if (index < currentSlide) {
+                    $('.presentation-slide').eq(index).addClass('active');
+                    $('.presentation-slide').eq(currentSlide).addClass('prev');
+                } else {
+                    $('.presentation-slide').eq(index).addClass('active');
+                }
+                
+                currentSlide = index;
+                updatePresentationControls();
+            }
+            
+            // Start presentation
+            $('#start-presentation').click(function() {
+                $('#video-presentation').addClass('active');
+                initPresentation();
+            });
+            
+            // Close presentation
+            $('#presentation-close').click(function() {
+                $('#video-presentation').removeClass('active');
+            });
+            
+            // Next slide
+            $('#next-slide').click(function() {
+                if (currentSlide < slides.length - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+            
+            // Previous slide
+            $('#prev-slide').click(function() {
+                if (currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+            
+            // Keyboard navigation
+            $(document).keydown(function(e) {
+                if ($('#video-presentation').hasClass('active')) {
+                    if (e.key === 'ArrowRight' || e.key === ' ') {
+                        $('#next-slide').click();
+                    } else if (e.key === 'ArrowLeft') {
+                        $('#prev-slide').click();
+                    } else if (e.key === 'Escape') {
+                        $('#presentation-close').click();
+                    }
+                }
+            });
+            
+            // Quiz functionality
+            const quizQuestions = [
+                {
+                    question: "What is the primary purpose of a firewall?",
+                    options: [
+                        "To protect against viruses",
+                        "To block unauthorized access while allowing authorized communications",
+                        "To encrypt data",
+                        "To create strong passwords"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Which of these is an example of social engineering?",
+                    options: [
+                        "A computer virus",
+                        "A phishing email pretending to be from your bank",
+                        "A DDoS attack",
+                        "Ransomware"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "What does HTTPS stand for?",
+                    options: [
+                        "HyperText Transfer Protocol Secure",
+                        "High-Tech Transfer Protocol System",
+                        "HyperText Transfer Protocol Standard",
+                        "High-Tech Text Protocol Secure"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Which of these is the strongest password?",
+                    options: [
+                        "password123",
+                        "P@ssw0rd!",
+                        "MyDog'sName2023!",
+                        "12345678"
+                    ],
+                    correct: 2
+                },
+                {
+                    question: "What is two-factor authentication?",
+                    options: [
+                        "Using two different passwords",
+                        "A security process that requires two forms of identification",
+                        "Having two firewalls",
+                        "Using both antivirus and anti-malware software"
+                    ],
+                    correct: 1
+                }
+            ];
+            
+            let currentQuestion = 0;
+            let score = 0;
+            
+            $('#start-quiz').click(function() {
+                $('#quiz-intro').addClass('d-none');
+                $('#quiz-questions').removeClass('d-none');
+                showQuestion(currentQuestion);
+            });
+            
+            function showQuestion(index) {
+                $('#current-question').text(index + 1);
+                $('#question-text').text(quizQuestions[index].question);
+                
+                const optionsContainer = $('#options-container');
+                optionsContainer.empty();
+                
+                quizQuestions[index].options.forEach((option, i) => {
+                    const optionElement = $('<div class="quiz-option"></div>');
+                    optionElement.text(option);
+                    optionElement.attr('data-index', i);
+                    optionElement.click(function() {
+                        checkAnswer(i, index);
+                    });
+                    optionsContainer.append(optionElement);
+                });
+                
+                $('#next-question').addClass('d-none');
+            }
+            
+            function checkAnswer(selectedIndex, questionIndex) {
+                const correctIndex = quizQuestions[questionIndex].correct;
+                const options = $('.quiz-option');
+                
+                options.each(function() {
+                    $(this).off('click'); // Disable further clicks
+                    
+                    if ($(this).attr('data-index') == correctIndex) {
+                        $(this).addClass('correct');
+                    } else if ($(this).attr('data-index') == selectedIndex && selectedIndex != correctIndex) {
+                        $(this).addClass('incorrect');
+                    }
+                });
+                
+                if (selectedIndex == correctIndex) {
+                    score++;
+                    $('#score').text(score);
+                }
+                
+                if (currentQuestion < quizQuestions.length - 1) {
+                    $('#next-question').removeClass('d-none');
+                } else {
+                    $('#show-results').removeClass('d-none');
+                }
+            }
+            
+            $('#next-question').click(function() {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                $(this).addClass('d-none');
+            });
+            
+            $('#show-results').click(function() {
+                $('#quiz-questions').addClass('d-none');
+                $('#quiz-results').removeClass('d-none');
+                $('#final-score').text(score + '/' + quizQuestions.length);
+                
+                let message = '';
+                if (score === quizQuestions.length) {
+                    message = 'Excellent! You\'re a cybersecurity expert!';
+                } else if (score >= quizQuestions.length * 0.7) {
+                    message = 'Great job! You have good cybersecurity knowledge.';
+                } else if (score >= quizQuestions.length * 0.5) {
+                    message = 'Not bad! Keep learning about cybersecurity.';
+                } else {
+                    message = 'Keep studying! Cybersecurity is an important skill.';
+                }
+                
+                $('#result-message').text(message);
+            });
+            
+            $('#restart-quiz').click(function() {
+                currentQuestion = 0;
+                score = 0;
+                $('#score').text(score);
+                $('#quiz-results').addClass('d-none');
+                $('#quiz-questions').removeClass('d-none');
+                showQuestion(currentQuestion);
+            });
+            
+            // Smooth scrolling for navigation links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                const target = this.hash;
+                const $target = $(target);
+                
+                $('html, body').animate({
+                    'scrollTop': $target.offset().top - 70
+                }, 800, 'swing');
+            });
+        });
+    </script>
+</body>
+</html>
